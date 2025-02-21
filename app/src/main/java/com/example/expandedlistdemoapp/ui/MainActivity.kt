@@ -6,11 +6,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
@@ -19,15 +25,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.example.expandedlistdemoapp.data.DataManager
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.expandedlistdemoapp.data.viewmodels.StateListViewModel
+import com.example.expandedlistdemoapp.ui.components.StateListScreen
 import com.example.expandedlistdemoapp.ui.theme.ExpandedListDemoAppTheme
-import com.example.expandedlistdemoapp.ui.viewmodels.StateListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+
 class MainActivity : ComponentActivity() {
-     private val stateListViewModel:StateListViewModel by viewModels()
+    private val stateListViewModel: StateListViewModel by viewModels()
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
@@ -40,26 +51,58 @@ class MainActivity : ComponentActivity() {
                     Surface(
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        Scaffold(topBar = {
-                            CenterAlignedTopAppBar(colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        Scaffold(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .height(20.dp),
 
-                                ), title = {
-                                Text(
-                                    text = "CityList",
-                                    style = MaterialTheme.typography.headlineMedium.copy(
-                                        fontWeight = FontWeight.Bold
+                            topBar = {
+
+                                CenterAlignedTopAppBar(colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+
+                                    ), title = {
+                                    Text(
+                                        text = "States",
+                                        style = MaterialTheme.typography.headlineMedium.copy(
+                                            fontWeight = FontWeight.Bold
+                                        )
                                     )
-                                )
+
+                                })
+
                             })
 
-                        }){}
-                        stateListViewModel.fetchStateList()
-                        MainUIScreen(stateListViewModel)
+                        {
+                            stateListViewModel.fetchStateList()
+                            StateListScreen(stateListViewModel)
+                        }
+                        ThemeButton()
+
                     }
                 })
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ThemeButton() {
+    val checked = true
+    Column(
+        horizontalAlignment = Alignment.End,
+       modifier = Modifier.padding(20.dp)
+
+    ) {
+        Switch(checked = checked, onCheckedChange = {
+            if (checked)
+                ThemeState.isLight = !ThemeState.isLight
+            else
+                ThemeState.isLight = ThemeState.isLight
+
+        })
+
     }
 }
 
