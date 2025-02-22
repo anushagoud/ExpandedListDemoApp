@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -92,7 +91,7 @@ fun ThemeButton() {
     val checked = true
     Column(
         horizontalAlignment = Alignment.End,
-       modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(20.dp)
 
     ) {
         Switch(checked = checked, onCheckedChange = {

@@ -6,29 +6,28 @@ import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.expandedlistdemoapp.data.model.StateListModel
+import com.example.expandedlistdemoapp.data.viewmodels.StateListViewModel
 import com.example.expandedlistdemoapp.ui.components.StateListScreen
-import com.example.expandedlistdemoapp.ui.viewmodels.StateListViewModel
 
 
 @Composable
 fun MainUIScreen(stateListViewModel: StateListViewModel) {
 
-    var checked=true
+    var checked = true
     Column(
         modifier = Modifier.padding(10.dp)
     ) {
 
         Switch(checked = checked, onCheckedChange = {
-            if(checked)
+            if (checked)
                 ThemeState.isLight = !ThemeState.isLight
             else
-                ThemeState.isLight=ThemeState.isLight
+                ThemeState.isLight = ThemeState.isLight
 
         })
         Column {
 
-                StateListScreen(stateListViewModel)
+            StateListScreen(stateListViewModel)
 
         }
 
