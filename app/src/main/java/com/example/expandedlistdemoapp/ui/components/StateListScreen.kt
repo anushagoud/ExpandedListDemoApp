@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.expandedlistdemoapp.data.datasource.Constant
 import com.example.expandedlistdemoapp.data.viewmodels.StateListViewModel
 
 @Composable
@@ -31,12 +32,13 @@ fun StateListScreen(stateListViewModel: StateListViewModel) {
     var count = 1
     var reversedDataList = data
     var btnClicked by remember { mutableStateOf(false) }
+    var const = Constant()
     Column(
     ) {
         LazyColumn(
             modifier = Modifier
                 .weight(1.7f)
-                .padding(10.dp), content = {
+                .padding(const.small), content = {
 
                 if (btnClicked) {
                     reversedDataList = data.reversed()
@@ -48,7 +50,7 @@ fun StateListScreen(stateListViewModel: StateListViewModel) {
                     Card(
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.primary
-                        ), modifier = Modifier.padding(vertical = 5.dp, horizontal = 5.dp)
+                        ), modifier = Modifier.padding(vertical = const.tiny, horizontal = const.tiny)
                     ) {
 
                         StateListViewScreen(name = item)
@@ -69,7 +71,7 @@ fun StateListScreen(stateListViewModel: StateListViewModel) {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(10.dp),
+                    .padding(const.small),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.inversePrimary)
             ) {
                 Text(

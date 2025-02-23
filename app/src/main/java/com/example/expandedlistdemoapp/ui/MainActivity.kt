@@ -29,7 +29,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.expandedlistdemoapp.data.datasource.Constant
 import com.example.expandedlistdemoapp.data.viewmodels.StateListViewModel
+import com.example.expandedlistdemoapp.ui.ThemeState.const
 import com.example.expandedlistdemoapp.ui.components.StateListScreen
 import com.example.expandedlistdemoapp.ui.theme.ExpandedListDemoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +45,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             ExpandedListDemoAppTheme {
@@ -53,7 +56,7 @@ class MainActivity : ComponentActivity() {
                         Scaffold(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .height(20.dp),
+                                .height(const.medium),
 
                             topBar = {
 
@@ -124,4 +127,5 @@ fun MyAppTheme(
 
 object ThemeState {
     var isLight by mutableStateOf(true)
+    var const =Constant()
 }

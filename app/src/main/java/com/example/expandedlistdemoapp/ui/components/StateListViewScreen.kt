@@ -20,21 +20,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.expandedlistdemoapp.data.datasource.Constant
 import com.example.expandedlistdemoapp.data.model.StateListModel
 
 
 @Composable
 fun StateListViewScreen(name: StateListModel) {
     var expanded by remember { mutableStateOf(false) }
+    var const =Constant()
     Row(
         modifier = Modifier
-            .padding(10.dp)
+            .padding(const.small)
             .animateContentSize()
     ) {
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(10.dp)
+                .padding(const.small)
         ) {
             name.adminName?.let {
                 Text(
